@@ -56,15 +56,15 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="relative z-50">
-            <div className="h-11 w-36 relative transition-all duration-300">
+            <div className="h-14 w-44 relative transition-all duration-300">
               {!isScrolled && (
-                <div className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-xl" />
+                <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-xl" />
               )}
               <Image 
                 src="/MS Citizen logo.png" 
                 alt="MS Citizen Logo" 
                 fill 
-                sizes="(max-width: 1024px) 104px, 144px"
+                sizes="(max-width: 1024px) 128px, 176px"
                 className="object-contain relative z-10"
                 priority
               />
@@ -150,8 +150,8 @@ const Navbar = () => {
             className="fixed inset-0 bg-near-black z-40 flex flex-col lg:hidden"
           >
             <div className="flex justify-between items-center p-6 border-b border-white/10">
-              <div className="h-10 w-24 relative">
-                <Image src="/MS Citizen logo.png" alt="Logo" fill sizes="96px" className="object-contain" />
+              <div className="h-10 w-28 relative">
+                <Image src="/MS Citizen logo.png" alt="Logo" fill sizes="112px" className="object-contain" />
               </div>
               <button onClick={() => setIsMobileMenuOpen(false)}>
                 <X className="w-8 h-8" />
