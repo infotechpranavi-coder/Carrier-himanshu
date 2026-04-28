@@ -1,0 +1,10 @@
+<svg width="240" height="72" viewBox="0 0 240 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">MS Citizen Carrier</title>
+  <desc id="logoDesc">MS Citizen Carrier logo</desc>
+  <rect x="2" y="2" width="68" height="68" rx="18" fill="#B3121F" />
+  <path d="M17 21H31.1L40 41.7L48.9 21H63V51H52.9V35.9L46.2 51H33.8L27.1 35.9V51H17V21Z" fill="white" />
+  <path d="M86 24H102V51H111V24H127V16H86V24Z" fill="white" />
+  <path d="M132 16H142V51H132V16Z" fill="#B3121F" />
+  <path d="M148 16H156.8L170.1 34.4L183.4 16H192.2V51H182.2V31.1L170.1 47.4L158 31.1V51H148V16Z" fill="white" />
+  <text x="86" y="63" fill="#D6D6D6" font-family="Arial, Helvetica, sans-serif" font-size="9" letter-spacing="4">CARRIER</text>
+</svg>

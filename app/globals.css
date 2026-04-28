@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-red: #CC0000;
+  --color-dark-charcoal: #1A1A1A;
+  --color-near-black: #0D0D0D;
+  --color-light-gray: #B0B0B0;
+  --color-section-dark: #111111;
+  --color-card-bg: #1E1E1E;
+  --color-accent-red: #8B0000;
+
+  --font-inter: var(--font-inter);
+  --font-barlow: var(--font-barlow);
+}
+
+:root {
+  --background: #0D0D0D;
+  --foreground: #FFFFFF;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-barlow);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0D0D0D;
+}
+::-webkit-scrollbar-thumb {
+  background: #CC0000;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8B0000;
+}
+
+/* Animations */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+/* Grid overlay for hero */
+.grid-overlay {
+  background-image: linear-gradient(rgba(204, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
