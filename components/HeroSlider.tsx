@@ -8,6 +8,7 @@ import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Phone, Mail } from 'lucide-react';
 import { HERO_SLIDES } from '@/lib/constants';
+import { useIsHydrated } from '@/lib/useIsHydrated';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -15,6 +16,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const HeroSlider = () => {
+  const isHydrated = useIsHydrated();
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
       <Swiper
@@ -45,11 +48,11 @@ const HeroSlider = () => {
 
                 <div className="container mx-auto px-4 relative z-10">
                   <div className="max-w-4xl">
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence mode="wait" initial={false}>
                       {isActive && (
                         <div className="space-y-6">
                           <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={isHydrated ? { opacity: 0, y: 30 } : false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="text-6xl md:text-8xl font-black leading-tight"
@@ -59,7 +62,7 @@ const HeroSlider = () => {
                           </motion.h1>
 
                           <motion.p
-                            initial={{ opacity: 0 }}
+                            initial={isHydrated ? { opacity: 0 } : false}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
                             className="text-xl text-light-gray max-w-2xl leading-relaxed"
@@ -68,7 +71,7 @@ const HeroSlider = () => {
                           </motion.p>
 
                           <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={isHydrated ? { opacity: 0, y: 20 } : false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
                             className="pt-4"

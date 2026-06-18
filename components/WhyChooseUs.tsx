@@ -5,8 +5,11 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { WHY_POINTS } from '@/lib/constants';
 import SectionHeading from './SectionHeading';
+import { useIsHydrated } from '@/lib/useIsHydrated';
 
 const WhyChooseUs = ({ light = false }: { light?: boolean }) => {
+  const isHydrated = useIsHydrated();
+
   return (
     <section className={light ? "py-24 bg-white border-y border-primary-red/20" : "py-24 bg-section-dark border-y border-primary-red/20"}>
       <div className="container mx-auto px-4">
@@ -26,7 +29,7 @@ const WhyChooseUs = ({ light = false }: { light?: boolean }) => {
             
             {/* Experience Badge */}
             <motion.div 
-              initial={{ scale: 0 }}
+              initial={isHydrated ? { scale: 0 } : false}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               className="absolute -bottom-8 -right-8 bg-primary-red p-8 rounded-2xl shadow-2xl text-center hidden md:block"
@@ -48,7 +51,7 @@ const WhyChooseUs = ({ light = false }: { light?: boolean }) => {
               {WHY_POINTS.map((point, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={isHydrated ? { opacity: 0, x: 20 } : false}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}

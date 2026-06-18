@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useIsHydrated } from '@/lib/useIsHydrated';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -11,9 +12,11 @@ interface RevealProps {
 }
 
 const Reveal = ({ children, className, delay = 0 }: RevealProps) => {
+  const isHydrated = useIsHydrated();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={isHydrated ? { opacity: 0, y: 28 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.7, ease: 'easeOut', delay }}

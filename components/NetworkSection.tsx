@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import SectionHeading from './SectionHeading';
+import IndiaMap from './IndiaMap';
 
 const corridors = [
   { from: 'Mumbai', to: 'Delhi', time: '48 Hrs' },
@@ -55,37 +56,10 @@ const NetworkSection = ({ light = false }: { light?: boolean }) => {
             </div>
           </div>
 
-          {/* Right: Mock India Map with Glowing Hubs */}
+          {/* Right: India Map with Glowing Hubs */}
           <div className="lg:w-1/2 flex justify-center">
-            <div className="relative w-full max-w-lg aspect-square">
-              {/* Simplified India SVG Outline (Mock) */}
-              <svg viewBox="0 0 100 100" className={light ? "w-full h-full text-near-black/10 fill-current" : "w-full h-full text-white/5 fill-current"}>
-                <path d="M50 5 L60 15 L70 10 L80 20 L90 35 L85 50 L95 65 L80 80 L65 75 L50 95 L35 80 L20 85 L5 65 L15 50 L10 35 L20 20 L30 10 L40 15 Z" />
-              </svg>
-              
-              {/* Glowing Dots (Hubs) */}
-              {[
-                { top: '20%', left: '45%', label: 'Delhi' },
-                { top: '65%', left: '25%', label: 'Mumbai' },
-                { top: '55%', left: '30%', label: 'Gujarat' },
-                { top: '80%', left: '50%', label: 'Bengaluru' },
-                { top: '45%', left: '75%', label: 'Kolkata' },
-                { top: '85%', left: '35%', label: 'Chennai' },
-              ].map((hub, i) => (
-                <div key={i} className="absolute" style={{ top: hub.top, left: hub.left }}>
-                  <div className="relative">
-                    <motion.div 
-                      animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute -inset-2 bg-primary-red rounded-full"
-                    />
-                    <div className="w-2.5 h-2.5 bg-primary-red rounded-full relative z-10 shadow-[0_0_15px_rgba(204,0,0,0.8)]"></div>
-                    <span className={light ? "absolute left-4 top-1/2 -translate-y-1/2 text-[10px] font-bold text-near-black whitespace-nowrap bg-white/90 px-2 py-0.5 rounded border border-black/10 opacity-0 lg:opacity-100" : "absolute left-4 top-1/2 -translate-y-1/2 text-[10px] font-bold text-white whitespace-nowrap bg-near-black/80 px-2 py-0.5 rounded border border-white/10 opacity-0 lg:opacity-100"}>
-                      {hub.label}
-                    </span>
-                  </div>
-                </div>
-              ))}
+            <div className="relative w-full max-w-md aspect-square">
+              <IndiaMap light={light} />
             </div>
           </div>
         </div>

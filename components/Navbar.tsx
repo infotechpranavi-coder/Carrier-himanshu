@@ -27,7 +27,7 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 w-full z-50">
       {/* Top Bar */}
       {!isScrolled && (
-        <div className="text-white py-2 px-4 hidden lg:block bg-transparent border-b border-white/10">
+        <div className="text-white py-1.5 px-4 hidden lg:block bg-transparent border-b border-white/10">
           <div className="container mx-auto flex justify-between items-center text-sm font-medium">
             <div className="flex items-center space-x-6">
               <a href="tel:+911234567890" className="flex items-center hover:text-white/80 transition-colors">
@@ -41,6 +41,7 @@ const Navbar = () => {
             </div>
             <div className="flex items-center space-x-6">
               <Link href="/tracking" className="hover:text-white/80 transition-colors">Track Shipment</Link>
+              <Link href="/dashboard" className="hover:text-white/80 transition-colors">Dashboard</Link>
               <Link href="/careers" className="hover:text-white/80 transition-colors">Careers</Link>
               <Link href="/contact" className="hover:text-white/80 transition-colors">Support</Link>
             </div>
@@ -50,22 +51,29 @@ const Navbar = () => {
 
       {/* Main Nav */}
       <nav className={cn(
-        "transition-all duration-300 px-4 py-4 lg:py-0",
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-black/5" : "bg-transparent"
+        "transition-all duration-300 px-4",
+        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-black/5 py-2" : "bg-transparent py-3 lg:py-0"
       )}>
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center min-h-0">
           {/* Logo */}
-          <Link href="/" className="relative z-50">
-            <div className="h-14 w-44 relative transition-all duration-300">
+          <Link href="/" className={cn("relative z-50", !isScrolled && "mt-1 lg:mt-2")}>
+            <div className={cn(
+              "relative transition-all duration-300",
+              isScrolled ? "h-10 w-32" : "h-12 w-36 lg:h-14 lg:w-40"
+            )}>
               {!isScrolled && (
-                <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-xl" />
+                <div className="absolute left-1/2 top-[58%] h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-xl" />
               )}
               <Image 
                 src="/MS Citizen logo.png" 
                 alt="MS Citizen Logo" 
                 fill 
-                sizes="(max-width: 1024px) 128px, 176px"
-                className="object-contain relative z-10"
+                sizes="(max-width: 1024px) 128px, 160px"
+                className={cn(
+                  "object-contain relative z-10 transition-all duration-300 origin-center",
+                  isScrolled ? "scale-[0.88]" : "scale-[0.82]",
+                  !isScrolled && "translate-y-1"
+                )}
                 priority
               />
             </div>
@@ -83,7 +91,8 @@ const Navbar = () => {
                 <Link 
                   href={item.href}
                   className={cn(
-                    "flex items-center py-8 text-sm font-bold uppercase tracking-wider transition-colors hover:text-primary-red relative",
+                    "flex items-center text-sm font-bold uppercase tracking-wider transition-colors hover:text-primary-red relative",
+                    isScrolled ? "py-2.5" : "py-5",
                     isScrolled
                       ? (pathname.startsWith(item.href) && item.href !== '/' ? "text-primary-red" : "text-near-black")
                       : (pathname.startsWith(item.href) && item.href !== '/' ? "text-primary-red" : "text-white")
@@ -94,7 +103,8 @@ const Navbar = () => {
                   
                   {/* Underline Animation */}
                   <span className={cn(
-                    "absolute bottom-6 left-0 h-0.5 bg-primary-red transition-all duration-300",
+                    "absolute left-0 h-0.5 bg-primary-red transition-all duration-300",
+                    isScrolled ? "bottom-1.5" : "bottom-3",
                     pathname === item.href ? "w-full" : "w-0 group-hover:w-full"
                   )} />
                 </Link>
@@ -150,8 +160,10 @@ const Navbar = () => {
             className="fixed inset-0 bg-near-black z-40 flex flex-col lg:hidden"
           >
             <div className="flex justify-between items-center p-6 border-b border-white/10">
-              <div className="h-10 w-28 relative">
-                <Image src="/MS Citizen logo.png" alt="Logo" fill sizes="112px" className="object-contain" />
+              <div className="h-10 w-28 relative flex items-center justify-center">
+                <div className="relative h-full w-full scale-[0.88] origin-center">
+                  <Image src="/MS Citizen logo.png" alt="Logo" fill sizes="112px" className="object-contain" />
+                </div>
               </div>
               <button onClick={() => setIsMobileMenuOpen(false)}>
                 <X className="w-8 h-8" />

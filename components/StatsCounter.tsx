@@ -4,8 +4,11 @@ import React from 'react';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
 import { STATS } from '@/lib/constants';
+import { useIsHydrated } from '@/lib/useIsHydrated';
 
 const StatsCounter = ({ light = false }: { light?: boolean }) => {
+  const isHydrated = useIsHydrated();
+
   return (
     <section className={light ? "py-20 bg-white border-y border-primary-red/20 relative overflow-hidden" : "py-20 bg-near-black border-y border-primary-red/20 relative overflow-hidden"}>
       {/* Decorative Red Line */}
@@ -16,14 +19,18 @@ const StatsCounter = ({ light = false }: { light?: boolean }) => {
           {STATS.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={isHydrated ? { opacity: 0, y: 20 } : false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               className="space-y-2"
             >
               <div className={light ? "text-5xl md:text-6xl font-black text-near-black flex justify-center items-baseline" : "text-5xl md:text-6xl font-black text-white flex justify-center items-baseline"}>
-                <CountUp end={stat.value} duration={3} enableScrollSpy scrollSpyOnce />
+                {isHydrated ? (
+                  <CountUp end={stat.value} duration={3} enableScrollSpy scrollSpyOnce />
+                ) : (
+                  <span>{stat.value}</span>
+                )}
                 <span className="text-primary-red ml-1">{stat.suffix}</span>
               </div>
               <div className="space-y-1">

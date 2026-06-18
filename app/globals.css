@@ -45,6 +45,18 @@ h1, h2, h3, h4, h5, h6 {
   background: #8B0000;
 }
 
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
+  color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(27%) sepia(98%) saturate(7492%) hue-rotate(358deg) brightness(95%) contrast(115%);
+}
+
 /* Animations */
 @keyframes scroll {
   0% { transform: translateX(0); }
@@ -53,6 +65,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-scroll {
   animation: scroll 30s linear infinite;
+}
+
+@keyframes hub-pulse {
+  0%, 100% { transform: scale(0.78); opacity: 0.35; }
+  50% { transform: scale(1.22); opacity: 0.1; }
+}
+
+.animate-hub-pulse {
+  animation: hub-pulse 2.5s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
 /* Grid overlay for hero */
