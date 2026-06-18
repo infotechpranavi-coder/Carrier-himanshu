@@ -4,9 +4,18 @@ import PageHero from '@/components/PageHero';
 import SectionHeading from '@/components/SectionHeading';
 import CareersJobList from '@/components/CareersJobList';
 import { getAllCareers } from '@/lib/careers-db';
+import type { Career } from '@/lib/career-data';
+
+export const dynamic = 'force-dynamic';
 
 const CareersPage = async () => {
-  const jobs = await getAllCareers();
+  let jobs: Career[] = [];
+
+  try {
+    jobs = await getAllCareers();
+  } catch (error) {
+    console.error('Failed to load careers:', error);
+  }
 
   return (
     <div className="flex flex-col w-full">
