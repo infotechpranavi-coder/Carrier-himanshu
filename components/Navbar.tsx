@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50">
       {/* Top Bar */}
-      {!isScrolled && (
+      {!isScrolled && pathname !== '/dashboard' && (
         <div className="text-white py-1.5 px-4 hidden lg:block bg-transparent border-b border-white/10">
           <div className="container mx-auto flex justify-between items-center text-sm font-medium">
             <div className="flex items-center space-x-6">
@@ -41,7 +41,6 @@ const Navbar = () => {
             </div>
             <div className="flex items-center space-x-6">
               <Link href="/tracking" className="hover:text-white/80 transition-colors">Track Shipment</Link>
-              <Link href="/dashboard" className="hover:text-white/80 transition-colors">Dashboard</Link>
               <Link href="/careers" className="hover:text-white/80 transition-colors">Careers</Link>
               <Link href="/contact" className="hover:text-white/80 transition-colors">Support</Link>
             </div>
@@ -62,17 +61,16 @@ const Navbar = () => {
               isScrolled ? "h-10 w-32" : "h-12 w-36 lg:h-14 lg:w-40"
             )}>
               {!isScrolled && (
-                <div className="absolute left-1/2 top-[58%] h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-xl" />
+                <div className="absolute left-1/2 top-[62%] h-16 w-16 lg:h-18 lg:w-18 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow-xl" />
               )}
-              <Image 
-                src="/MS Citizen logo.png" 
-                alt="MS Citizen Logo" 
-                fill 
+              <Image
+                src="/MS Citizen logo.png"
+                alt="MS Citizen Logo"
+                fill
                 sizes="(max-width: 1024px) 128px, 160px"
                 className={cn(
                   "object-contain relative z-10 transition-all duration-300 origin-center",
-                  isScrolled ? "scale-[0.88]" : "scale-[0.82]",
-                  !isScrolled && "translate-y-1"
+                  isScrolled ? "scale-[0.84]" : "scale-[0.80] translate-y-2.5",
                 )}
                 priority
               />
@@ -161,7 +159,7 @@ const Navbar = () => {
           >
             <div className="flex justify-between items-center p-6 border-b border-white/10">
               <div className="h-10 w-28 relative flex items-center justify-center">
-                <div className="relative h-full w-full scale-[0.88] origin-center">
+                <div className="relative h-full w-full scale-[0.80] origin-center">
                   <Image src="/MS Citizen logo.png" alt="Logo" fill sizes="112px" className="object-contain" />
                 </div>
               </div>

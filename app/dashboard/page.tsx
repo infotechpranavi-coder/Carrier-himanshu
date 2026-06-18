@@ -2,7 +2,6 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import {
   STATUS_STYLES,
@@ -16,8 +15,10 @@ import {
 } from '@/lib/dashboard-data';
 import { fetchShipments, saveShipment, updateShipment, deleteShipment } from '@/lib/shipment-store';
 import { fetchEnquiries, deleteEnquiry as removeEnquiry } from '@/lib/enquiry-store';
+import { fetchCareers } from '@/lib/career-store';
 import type { Enquiry } from '@/lib/enquiry-data';
 import DashboardSidebar, { type DashboardTab } from '@/components/DashboardSidebar';
+import DashboardCareersPanel from '@/components/DashboardCareersPanel';
 import ShipmentTrackingTimeline from '@/components/ShipmentTrackingTimeline';
 import MilestoneEditor from '@/components/MilestoneEditor';
 import {
@@ -96,6 +97,7 @@ const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState<DashboardTab>('tracker');
   const [shipments, setShipments] = useState<DashboardShipment[]>([]);
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+  const [careersCount, setCareersCount] = useState(0);
   const [query, setQuery] = useState('');
   const [enquiryQuery, setEnquiryQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<ShipmentStatus | 'All'>('All');
@@ -127,9 +129,16 @@ const DashboardPage = () => {
       .finally(() => setIsEnquiriesLoading(false));
   };
 
+  const loadCareersCount = () => {
+    fetchCareers()
+      .then((careers) => setCareersCount(careers.length))
+      .catch(() => setFormError('Failed to load careers from database.'));
+  };
+
   useEffect(() => {
     loadShipments();
     loadEnquiries();
+    loadCareersCount();
   }, []);
 
   const filteredShipments = useMemo(() => {
@@ -321,16 +330,15 @@ const DashboardPage = () => {
     'w-full bg-near-black border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary-red transition-colors';
 
   return (
-    <div className="flex flex-col w-full">
-      <PageHero title="Operations Dashboard" breadcrumb={[{ label: 'Dashboard', href: '/dashboard' }]} />
-
-      <section className="py-24 bg-near-black border-t border-white/5">
+    <div className="flex flex-col w-full pt-28">
+      <section className="py-12 bg-near-black border-t border-white/5">
         <Reveal className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
             <DashboardSidebar
               activeTab={activeTab}
               onTabChange={setActiveTab}
               enquiryCount={enquiries.length}
+              careersCount={careersCount}
             />
 
             <div className="flex-1 min-w-0">
@@ -622,6 +630,37 @@ const DashboardPage = () => {
                 <strong className="text-white">{enquiries.length}</strong> enquiries
               </div>
             </div>
+          )}
+
+          {activeTab === 'careers' && (
+            <>
+              {formError && (
+                <div className="mb-6">
+                  <p className="text-sm text-primary-red bg-primary-red/10 border border-primary-red/20 rounded-xl px-4 py-3">
+                    {formError}
+                  </p>
+                </div>
+              )}
+              {successMessage && (
+                <div className="mb-6">
+                  <p className="text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3">
+                    {successMessage}
+                  </p>
+                </div>
+              )}
+              <DashboardCareersPanel
+                onMessage={(message, type) => {
+                  if (type === 'error') {
+                    setFormError(message);
+                    setSuccessMessage('');
+                  } else {
+                    setSuccessMessage(message);
+                    setFormError('');
+                    loadCareersCount();
+                  }
+                }}
+              />
+            </>
           )}
             </div>
           </div>

@@ -9,6 +9,7 @@ export interface Service {
   title: string;
   slug: string;
   icon: string;
+  image: string;
   shortDesc: string;
   longDesc: string;
   benefits: string[];

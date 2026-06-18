@@ -1,20 +1,22 @@
 "use client";
 
 import React from 'react';
-import { Inbox, Package } from 'lucide-react';
+import { Inbox, Package, Briefcase } from 'lucide-react';
 
-export type DashboardTab = 'tracker' | 'enquiry';
+export type DashboardTab = 'tracker' | 'enquiry' | 'careers';
 
 type DashboardSidebarProps = {
   activeTab: DashboardTab;
   onTabChange: (tab: DashboardTab) => void;
   enquiryCount: number;
+  careersCount: number;
 };
 
-const DashboardSidebar = ({ activeTab, onTabChange, enquiryCount }: DashboardSidebarProps) => {
-  const items: Array<{ id: DashboardTab; label: string; icon: typeof Package }> = [
+const DashboardSidebar = ({ activeTab, onTabChange, enquiryCount, careersCount }: DashboardSidebarProps) => {
+  const items: Array<{ id: DashboardTab; label: string; icon: typeof Package; count?: number }> = [
     { id: 'tracker', label: 'Tracker', icon: Package },
-    { id: 'enquiry', label: 'Enquiry', icon: Inbox },
+    { id: 'enquiry', label: 'Enquiry', icon: Inbox, count: enquiryCount },
+    { id: 'careers', label: 'Careers', icon: Briefcase, count: careersCount },
   ];
 
   return (
@@ -41,13 +43,13 @@ const DashboardSidebar = ({ activeTab, onTabChange, enquiryCount }: DashboardSid
                   <item.icon className="w-4 h-4" />
                   {item.label}
                 </span>
-                {item.id === 'enquiry' && enquiryCount > 0 && (
+                {item.count !== undefined && item.count > 0 && (
                   <span
                     className={`min-w-6 h-6 px-1.5 rounded-full text-[10px] font-black flex items-center justify-center ${
                       isActive ? 'bg-white text-primary-red' : 'bg-primary-red/20 text-primary-red'
                     }`}
                   >
-                    {enquiryCount}
+                    {item.count}
                   </span>
                 )}
               </button>

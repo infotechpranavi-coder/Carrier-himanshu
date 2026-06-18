@@ -31,3 +31,5 @@ export async function getDb(): Promise<Db> {
 
 export const SHIPMENTS_COLLECTION = 'shipments';
 export const ENQUIRIES_COLLECTION = 'enquiries';
+export const CAREERS_COLLECTION = 'careers';
+export const CAREER_APPLICATIONS_COLLECTION = 'career_applications';
